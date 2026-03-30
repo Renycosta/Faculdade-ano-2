@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Viagem {
+  id      Int     @id @default(autoincrement())
+  Destino  String  @db.VarChar(60)
+  Transporte  Transporte  @default(Terrestre)
+  Preco     Int     @db.SmallInt
+  dataSaida DateTime     @db.DateTime
+  dataRetorno DateTime     @db.DateTime
+  roteiro String? @db.Text
+  @@map("Viagens")
+}
+
+enum Transporte {
+  Terrestre
+  Aereo
+  Maritmo
+}

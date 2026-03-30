@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Filme {
+  id      Int     @id @default(autoincrement())
+  titulo  String  @db.VarChar(60)
+  genero  String  @db.VarChar(20)
+  ano     Int     @db.SmallInt
+  duracao Int     @db.SmallInt
+  sinopse String? @db.Text
+  @@map("filmes")
+}

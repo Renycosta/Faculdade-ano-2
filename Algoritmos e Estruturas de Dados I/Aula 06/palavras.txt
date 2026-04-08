@@ -1,0 +1,100 @@
+Melancia;Fruta grande, verde por fora e vermelha por dentro
+Teclado;Periférico usado para digitar no computador
+Astronauta;Profissional que viaja pelo espaço
+Girafa;Animal com o pescoço muito comprido
+Algoritmo;Sequência de instruções para resolver um problema
+Biblioteca;Local repleto de livros para empréstimo
+Cachoeira;Queda d'água natural em rios
+Diamante;Pedra preciosa extremamente dura e brilhante
+Elefante;O maior mamífero terrestre atual
+Foguete;Veículo usado para lançar satélites
+Guitarra;Instrumento musical de cordas muito usado no rock
+Helicoptero;Aeronave que decola na vertical
+Isqueiro;Pequeno objeto usado para produzir fogo
+Janela;Abertura na parede para entrada de luz e ar
+Kanguru;Animal australiano que se desloca aos saltos
+Lanterna;Objeto portátil que emite luz
+Martelo;Ferramenta usada para pregar pregos
+Neblina;Fenômeno climático que reduz a visibilidade
+Orquestra;Conjunto de músicos que tocam diversos instrumentos
+Papagaio;Ave colorida conhecida por repetir sons
+Queijo;Alimento derivado do leite muito comum em pizzas
+Relogio;Objeto usado para medir o tempo
+Sapato;Calçado que protege os pés
+Telefone;Aparelho usado para comunicação por voz
+Universo;Tudo o que existe no espaço e no tempo
+Vassoura;Utensílio usado para varrer o chão
+Xadrez;Jogo de tabuleiro com reis e rainhas
+Zebra;Animal listrado de preto e branco
+Abacaxi;Fruta com casca espinhosa e uma coroa
+Borboleta;Inseto que passa por metamorfose e tem asas coloridas
+Chocolate;Doce feito a partir do cacau
+Dinossauro;Animal pré-histórico extinto há milhões de anos
+Espelho;Superfície que reflete a imagem de quem olha
+Floresta;Grande área coberta por árvores e vegetação
+Geladeira;Eletrodoméstico usado para conservar alimentos
+Hipopotamo;Animal grande que vive muito tempo na água doce
+Internet;Rede mundial de computadores
+Jardineiro;Pessoa que cuida de flores e plantas
+Lampada;Objeto que transforma energia em luz
+Mochila;Bolsa usada nas costas para carregar pertences
+Navio;Grande embarcação que navega nos mares
+Oceano;Vasta extensão de água salgada
+Pinguim;Ave que não voa e vive em regiões frias
+Quadrado;Figura geométrica com quatro lados iguais
+Radio;Aparelho que transmite notícias e músicas por ondas
+Sorvete;Sobremesa gelada de diversos sabores
+Tartaruga;Réptil com uma carapaça protetora dura
+Umbigo;Cicatriz no abdômen resultante do cordão umbilical
+Violao;Instrumento de seis cordas dedilhadas
+Xampu;Produto usado para lavar os cabelos
+Youtube;Plataforma famosa de compartilhamento de vídeos
+Zumbi;Criatura fictícia que volta à vida com fome de cérebros
+Almofada;Objeto macio usado para apoiar a cabeça ou sentar
+Bicicleta;Veículo de duas rodas movido a pedaladas
+Caneta;Instrumento usado para escrever com tinta
+Dicionario;Livro que contém o significado das palavras
+Escada;Série de degraus para subir ou descer
+Formiga;Pequeno inseto que vive em colônias organizadas
+Gravata;Acessório de vestuário usado no pescoço com camisa
+Hospital;Local onde se tratam doentes e feridos
+Ilha;Porção de terra cercada de água por todos os lados
+Jacare;Réptil carnívoro de mandíbulas fortes
+Laranja;Fruta cítrica rica em vitamina C
+Morcego;Único mamífero capaz de voar
+Nuvem;Massa de vapor de água suspensa na atmosfera
+Onibus;Veículo de transporte coletivo urbano
+Piano;Grande instrumento musical com teclas brancas e pretas
+Quebra-cabeça;Jogo de montar peças para formar uma imagem
+Redaçao;Texto escrito sobre um determinado tema
+Satelite;Objeto que orbita um planeta
+Trem;Veículo que se desloca sobre trilhos
+Urso;Grande mamífero que pode hibernar no inverno
+Vampiro;Ser lendário que se alimenta de sangue
+Windsurf;Esporte praticado com uma prancha e uma vela
+Xicara;Recipiente usado para beber café ou chá
+Yoga;Prática física e mental de origem indiana
+Zoologico;Local onde animais selvagens são mantidos para exibição
+Anel;Acessório usado no dedo
+Bateria;Conjunto de peças de percussão ou fonte de energia
+Castelo;Residência fortificada típica da nobreza medieval
+Dragao;Criatura mitológica que cospe fogo
+Estrela;Corpo celeste que brilha no céu noturno
+Fone;Equipamento usado nos ouvidos para escutar áudio
+Gelo;Água no estado sólido
+Harpa;Instrumento musical de cordas muito antigo e grande
+Inverno;Estação mais fria do ano
+Jornal;Publicação diária com notícias em papel ou digital
+Lapis;Objeto de madeira com grafite para escrever
+Moeda;Pequeno disco de metal usado como dinheiro
+Nariz;Órgão do olfato localizado no rosto
+Ovo;Objeto posto por aves e répteis que contém o embrião
+Paraquedas;Equipamento usado para saltar de aviões em segurança
+Queimadura;Lesão na pele causada pelo calor ou sol
+Relampago;Clarão elétrico que ocorre durante tempestades
+Sino;Objeto metálico que produz som ao ser batido
+Tesoura;Utensílio usado para cortar papel ou tecidos
+Unha;Placa rígida que protege a ponta dos dedos
+Vento;Ar em movimento na atmosfera
+Xale;Peça de vestuário usada sobre os ombros
+Zebra;Animal africano conhecido por suas listras únicas

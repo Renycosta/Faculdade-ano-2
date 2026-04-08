@@ -294,6 +294,16 @@ INSERT INTO venda (idSessao, idUsuario, data, hora, valorIngresso, idTipoPagto) 
 (2, 1, '2024-08-01', '16:00:00', 15.00, 1),
 (4, 2, '2024-08-01', '16:00:00', 10.00, 2),
 (4, 3, '2024-04-01', '16:00:00', 10.00, 2);
+-- nova Venda ex2
+(6, 1, '2024-08-01', '21:30:00', 10.00, 2),
+(6, 2, '2024-08-01', '21:30:00', 10.00, 2),
+(6, 3, '2024-08-01', '21:30:00', 10.00, 2),
+(6, 4, '2024-08-01', '21:30:00', 10.00, 2);
+-- nova Venda ex3
+(5, 1, '2024-08-01', '19:00:00', 20.00, 1),
+(5, 2, '2024-08-01', '19:00:00', 20.00, 1),
+(5, 3, '2024-08-01', '19:00:00', 20.00, 1);
+
 
 -- Parcela
 INSERT INTO parcela (idVenda, valor, vencimento, situacao) VALUES
@@ -304,86 +314,193 @@ INSERT INTO parcela (idVenda, valor, vencimento, situacao) VALUES
 
 /*1) Crie uma consulta que liste o nome do filme e o somatório do valor dos ingressos vendidos, 
 considerando apenas as vendas com pagamento parcelado. Agrupe os resultados por filme.*/
-SELECT tituloOriginal, sum(valorIngresso) 
+SELECT tituloOriginal, SUM(valorIngresso) 
 FROM filme f 
 JOIN sessao s ON f.id = s.idFilme
 JOIN venda v ON s.id = v.idSessao
 WHERE idTipoPagto = 2
 GROUP BY tituloOriginal;
 
-/*
-2) Modifique a consulta anterior para listar apenas os filmes com mais de 3 ingressos vendidos. 
-Utilize a cláusula HAVING para realizar o filtro.
-*/
+/*2) Modifique a consulta anterior para listar apenas os filmes com mais de 3 ingressos vendidos. 
+Utilize a cláusula HAVING para realizar o filtro.*/
+SELECT tituloOriginal, SUM(valorIngresso) 
+FROM filme f 
+JOIN sessao s ON f.id = s.idFilme
+JOIN venda v ON s.id = v.idSessao
+WHERE idTipoPagto = 2
+GROUP BY tituloOriginal
+HAVING COUNT(idFilme) > 3;
 
-/*
-3) Crie uma consulta para listar a quantidade de usuários que efetuaram compras à vista.
-*/
+/*3) Crie uma consulta para listar a quantidade de usuários que efetuaram compras à vista.*/
+SELECT COUNT(idUsuario)
+FROM venda
+WHERE idTipoPagto = 1;
 
-/*
-4) Modifique a consulta anterior para exibir o nome dos usuários 
-e a quantidade total de compras à vista feitas por cada um.
-*/
+/*4) Modifique a consulta anterior para exibir o nome dos usuários 
+e a quantidade total de compras à vista feitas por cada um.*/
+SELECT nome, COUNT(idUsuario)
+FROM usuario u
+JOIN venda v ON u.id = v.idUsuario
+WHERE idTipoPagto = 1
+GROUP BY nome;
 
-/*
-5) Crie uma stored procedure chamada alteraValorIngresso(valor) 
+/*5) Crie uma stored procedure chamada alteraValorIngresso(valor) 
 que altere o valor de todos os ingressos vendidos para o valor fornecido como parâmetro. 
-Após a atualização, a procedure deve listar os ingressos afetados.
-*/
+Após a atualização, a procedure deve listar os ingressos afetados.*/
+DELIMITER $$
+CREATE PROCEDURE alteraValorIngresso(IN valor DOUBLE)
+BEGIN
+  UPDATE venda SET valorIngresso=valor;
+  SELECT * FROM venda WHERE valorIngresso=valor;
+END $$
+DELIMITER ;
 
-/*
-6) Crie uma stored procedure alteraSituacaoParcelas(idUsuario) 
+CALL alteraValorIngresso(50.00);
+
+/*6) Crie uma stored procedure alteraSituacaoParcelas(idUsuario) 
 que atualize a situação de todas as parcelas de um determinado usuário para "pagas". 
-O id do usuário será recebido como parâmetro.
-*/
+O id do usuário será recebido como parâmetro.*/
+DELIMITER $$
+CREATE PROCEDURE alteraSituacaoParcelas(IN valor_id_usuario INT)
+BEGIN
+  UPDATE parcela p
+  JOIN venda v ON p.idVenda = v.id 
+  SET situacao="pagas" 
+  WHERE v.idUsuario = valor_id_usuario;
+END $$
+DELIMITER ;
 
-/*
-7) Crie uma stored procedure relVendas(idUsuario) que receba o id de um usuário 
-e liste todas as parcelas associadas, juntamente com a situação de pagamento de cada uma.
-*/
+CALL alteraSituacaoParcelas(2);
 
-/*
-8) Crie uma stored procedure visualizaVendas(tipoVenda) 
+/*7) Crie uma stored procedure relVendas(idUsuario) que receba o id de um usuário 
+e liste todas as parcelas associadas, juntamente com a situação de pagamento de cada uma.*/
+DELIMITER $$
+CREATE PROCEDURE relVendas(IN valor_id_usuario INT)
+BEGIN
+  SELECT idVenda, situacao
+  FROM parcela p
+  JOIN venda v ON p.idVenda = v.id
+  WHERE v.idUsuario = valor_id_usuario;
+END $$
+DELIMITER ;
+
+CALL relVendas(2);
+
+/*8) Crie uma stored procedure visualizaVendas(tipoVenda) 
 que receba um parâmetro (1 para à vista, 2 para parcelado) 
-e retorne o somatório do valor das vendas para o tipo de pagamento selecionado.
-*/
+e retorne o somatório do valor das vendas para o tipo de pagamento selecionado.*/
+DELIMITER $$
+CREATE PROCEDURE visualizaVendas(IN tipo INT)
+BEGIN
+  IF tipo = 1 THEN
+    SELECT SUM(valorIngresso) FROM venda WHERE idTipoPagto = 1;
+  ELSE
+    SELECT SUM(valorIngresso) FROM venda WHERE idTipoPagto = 2;
+  END IF;
+END $$
+DELIMITER ;
 
-/*
-9) Crie uma procedure que receba o nome de um ator 
-e liste todos os filmes em que ele participou.
-*/
+CALL visualizaVendas(1);
+CALL visualizaVendas(2);
 
-/*
-10) Crie uma procedure que liste o nome dos atores 
-que ainda não participaram de nenhum filme.
-*/
+/*9) Crie uma procedure que receba o nome de um ator 
+e liste todos os filmes em que ele participou.*/
+DELIMITER $$
+CREATE PROCEDURE participacaoAtor(IN nome_Ator VARCHAR(45))
+BEGIN
+  SELECT tituloOriginal 
+  FROM filme f
+  JOIN elenco e ON f.id = e.idFilme
+  JOIN ator a ON a.id = e.idAtor
+  WHERE a.nome = nome_Ator;
+END $$
+DELIMITER ;
 
-/*
-11) Crie uma procedure que liste o título e o gênero de todos os filmes 
-que ainda não foram exibidos em nenhuma sessão de cinema.
-*/
+CALL participacaoAtor('Anne Hathaway');
 
-/*
-12) Crie uma procedure que receba o nome de uma cidade como parâmetro 
-e liste todos os cinemas localizados nesta cidade.
-*/
+/*10) Crie uma procedure que liste o nome dos atores 
+que ainda não participaram de nenhum filme.*/
+DELIMITER $$
+CREATE PROCEDURE naoParticipacaoAtor()
+BEGIN
+  SELECT nome 
+  FROM ator a
+  LEFT JOIN elenco e ON a.id = e.idAtor
+  WHERE e.idAtor IS NULL;
+END $$
+DELIMITER ;
 
-/*
-13) Crie uma procedure que receba dois parâmetros (gênero atual e gênero novo) 
-e altere o gênero de todos os filmes que correspondam ao gênero atual para o novo gênero informado.
-*/
+CALL naoParticipacaoAtor()
 
-/*
-14) Crie uma consulta para listar o título e a duração dos filmes 
+/*11) Crie uma procedure que liste o título e o gênero de todos os filmes 
+que ainda não foram exibidos em nenhuma sessão de cinema.*/
+DELIMITER $$
+CREATE PROCEDURE naoExibidos()
+BEGIN
+  SELECT tituloOriginal, nome
+  FROM genero g
+  JOIN filme f ON g.id = f.idGenero
+  LEFT JOIN sessao s ON f.id = s.idFilme
+  WHERE s.idFilme IS NULL;
+END $$
+DELIMITER ;
+
+CALL naoExibidos();
+
+/*12) Crie uma procedure que receba o nome de uma cidade como parâmetro 
+e liste todos os cinemas localizados nesta cidade.*/
+DELIMITER $$
+CREATE PROCEDURE cidadeCinema(IN nome_Cidade VARCHAR(45))
+BEGIN
+  SELECT nomeFantasia 
+  FROM cinema cin
+  JOIN cidade cid ON cid.id = cin.idCidade
+  WHERE nome = nome_Cidade;
+END $$
+DELIMITER ;
+
+CALL cidadeCinema('Pelotas');
+
+/*13) Crie uma procedure que receba dois parâmetros (gênero atual e gênero novo) 
+e altere o gênero de todos os filmes que correspondam ao gênero atual para o novo gênero informado.*/
+DELIMITER $$
+CREATE PROCEDURE novoGenero(IN genero_Atual VARCHAR(45), IN genero_novo VARCHAR(45))
+BEGIN
+  UPDATE genero SET nome=genero_novo WHERE nome=genero_Atual;
+END $$
+DELIMITER ;
+
+CALL novoGenero('Ficção', 'Ficção-Científica');
+
+/*14) Crie uma consulta para listar o título e a duração dos filmes 
 de um determinado gênero lançados após uma data específica. 
-Receba o nome do gênero e a data como parâmetros.
-*/
+Receba o nome do gênero e a data como parâmetros.*/
+DELIMITER $$
+CREATE PROCEDURE específica(IN genero_Nome VARCHAR(45), IN data_Info DATE)
+BEGIN
+  SELECT DISTINCT tituloOriginal, duracao
+  FROM filme f
+  JOIN genero g ON f.idGenero = g.id
+  JOIN sessao s ON f.id = s.idFilme
+  WHERE nome = genero_Nome 
+  AND data > data_Info;
+END $$
+DELIMITER ;
 
-/*
-15) Crie uma consulta que liste todas as sessões 
-onde a ocupação do público foi superior a 80% da capacidade do cinema.
-*/
+CALL específica('Drama', '2000-03-01');
 
+/*15) Crie uma consulta que liste todas as sessões 
+onde a ocupação do público foi superior a 80% da capacidade do cinema.*/
+DELIMITER $$
+CREATE PROCEDURE ocupaçãoPublico()
+BEGIN
+  SELECT * 
+  FROM sessao s
+  JOIN cinema c ON s.idCinema = c.id
+  WHERE publico > (80 * capacidade) / 100;
+END $$
+DELIMITER ;
+
+CALL ocupaçãoPublico()
 
 -- Obs.: Se for necessário crie os registros de inserção para testar as consultas solicitadas.
-

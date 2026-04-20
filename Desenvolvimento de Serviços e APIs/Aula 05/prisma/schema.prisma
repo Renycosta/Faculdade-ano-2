@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Selecao {
+  id           Int           @id @default(autoincrement())
+  pais         String        @db.VarChar(30) 
+  continente   Continentes
+  numCopas     Int?
+  jogadores    Jogador[]
+  treinador    String        @db.VarChar(30)
+  @@map("selecao")
+}
+
+model Jogador {
+  id           Int           @id @default(autoincrement())
+  nome         String        @db.VarChar(60)
+  posicao      Posicao
+  dataNasc     DateTime
+  numCamisa    Int
+  selecao      Selecao      @relation(fields: [selecaoId], references: [id])
+  selecaoId    Int
+  @@map("jogador")           
+}
+
+enum Continentes {
+  Africa
+  America
+  Antartida
+  Asia
+  Europa
+  Oceania
+}
+
+enum Posicao {
+  Goleiro
+  Lateral
+  Zagueiro
+  Meio_Campo
+  Atacante
+}

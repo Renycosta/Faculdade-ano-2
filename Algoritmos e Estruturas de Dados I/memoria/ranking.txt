@@ -1,0 +1,9 @@
+Marcos Costa;45;60
+Juliana Farias;50;53
+Simone Coelho;80;62
+Ricardo Lopes;75;70
+Luisa Vasques;25;29
+Gabriela Gusmao;25;31
+Juca Santos;5;16
+Carlos Farias;45;69
+Patricia Pereira;15;22

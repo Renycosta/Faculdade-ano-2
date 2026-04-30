@@ -12,44 +12,47 @@ def titulo(texto):
   print("-"*40)
 
 def top():
-    pilotos = {}
+  pilotos = {}
 
-    for i in f1:
-        piloto = i["Winner"]
-        pilotos[piloto] = pilotos.get(piloto, 0) + 1
+  for i in f1:
+    piloto = i["Winner"]
+    pilotos[piloto] = pilotos.get(piloto, 0) + 1
 
-    ordenar = sorted(pilotos.items(), key=lambda pilotos: pilotos[1], reverse=True)
+  ordenar = sorted(pilotos.items(), key=lambda pilotos: pilotos[1], reverse=True)
 
-    for x, (nome, vitorias) in enumerate(ordenar[0:10], start=1):
-        print(f"{x:2d} {nome:20s} {vitorias:4d}")
+  for x, (nome, vitorias) in enumerate(ordenar[0:10], start=1):
+    print(f"{x:2d} {nome:20s} {vitorias:4d}")
 
 def equipes():
-    equipes = {}
+  equipes = {}
 
-    for i in f1:
-        equipe = i["Car"]
-        equipes[equipe] = equipes.get(equipe, 0) + 1
+  for i in f1:
+    equipe = i["Car"]
+    equipes[equipe] = equipes.get(equipe, 0) + 1
     
-    ordenar = sorted(equipes.items(), key=lambda equipes: equipes[1],)
+  ordenar = sorted(equipes.items(), key=lambda equipes: equipes[1],)
 
-    for x, (nome, vitorias) in enumerate(ordenar, start=1):
-        if vitorias >= 10:
-            print(f"{x:2d} {nome:27s} {vitorias:4d}")
+  for x, (nome, vitorias) in enumerate(ordenar, start=1):
+    if vitorias >= 10:
+      print(f"{x:2d} {nome:27s} {vitorias:4d}")
 
 def tempo():
+  tempos = [x for x in f1 if x['Time'] != '' and len(x['Time']) == 11]
+  tempos2 = sorted(tempos, key=lambda tempo: tempo['Time'], reverse=True)
 
-    tempos = [x for x in f1 if x['Time'] != '' and len(x['Time']) == 11]
-    tempos2 = sorted(tempos, key=lambda tempo: tempo['Time'], reverse=True)
-
-    for x, i in enumerate(tempos2[0:10], start=1):
-        print(f"{x:2d} {i['Time']:13s} {i['Winner']:24s} {i['Car']:27s} {i['Grand Prix']:20s} {i['Date']:10s}")
+  for x, i in enumerate(tempos2[0:10], start=1):
+    print(f"{x:2d} {i['Time']:13s} {i['Winner']:24s} {i['Car']:27s} {i['Grand Prix']:20s} {i['Date']:10s}")
 
 def piloto():
-    nome = input("Digite um piloto: ")
+  nome = input("Digite um piloto: ")
 
-    principal = {}
+  principal = set()
 
-    analise = [x for x in f1 if x]
+  for i in f1:
+    if i['Winner'] == nome:
+      principal.add(i['Grand Prix']) 
+  
+  print(principal)
 
 while True:
   titulo("Passageiros do Titanic: Exemplos de Análises")
